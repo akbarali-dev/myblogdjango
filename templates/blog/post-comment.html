@@ -23,7 +23,9 @@
                     <h5 class="card-title">{{ post.name }}</h5>
                     <p class="card-text">{{ post.title }}</p>
 
-                   {% include 'blog/comments.html' %}
+
+
+                   {% include 'blog/comments.html' with comment=comments post_id=post.pk%}
 
                 </div>
             </div>

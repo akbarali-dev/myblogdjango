@@ -8,27 +8,43 @@
 </head>
 <body>
 
-        	<div class="">
-        		<div class="card-header">Chat</div>
-        		<div class="card-body height3">
-        			<ul class="chat-list">
-        				<li class="in">
+<div class="">
+    <div class="card-header">Comments</div>
+    <div class="card-body height3">
+        <ul class="chat-list">
+            {% for foo in  comment %}
+                <li class="in">
+                    <div class="chat-body">
+                        <div class="chat-message">
+                            <h5>{{ foo.user_fullname }}</h5>
+                            <h5>{{ foo.text }}</h5>
+                            <p>{{ foo.time_create }}</p>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <form method="POST" action="{% url 'blog:save_comment' %}">
+        {% csrf_token %}
+        <div class="input-group mb-3">
 
-        					<div class="chat-body">
-        						<div class="chat-message">
-        							<h4>Jimmy Willams</h4>
-        							<h5>Raw denim heard of them tofu master cleanse</h5>
-        							<h5>Raw denim heard of them tofu master cleanse</h5>
-        							<h5>Raw denim heard of them tofu master cleanse</h5>
-        							<h5>Raw denim heard of them tofu master cleanse</h5>
-        							<p>2022-06-06 22:00</p>
-        						</div>
-        					</div>
-        				</li>
+            <input type="text" hidden="hidden" name="post_id" value="{{ post_id }}">
+            <input required type="text" class="form-control" placeholder="fikringiz" aria-label="Recipient's username"
+                   aria-describedby="basic-addon2" name="comment">
+            <div class="input-group-append">
+                <button class="btn btn-outline-primary" type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-send"
+                         viewBox="0 0 16 16">
+                        <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"></path>
+                    </svg>
+                </button>
+            </div>
 
-        			</ul>
-        		</div>
-        	</div>
+        </div>
+    </form>
+</div>
 
 </body>
 </html>

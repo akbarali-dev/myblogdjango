@@ -20,3 +20,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+    def user_fullname(self):
+        return self.user.get_full_name()
