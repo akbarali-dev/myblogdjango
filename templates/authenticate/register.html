@@ -1,0 +1,36 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Error</strong> {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <!-- Tabs Titles -->
+
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <h1 style="padding: 5px;">Register</h1>
+        </div>
+
+        <!-- Login Form -->
+        <form method="POST" action="{% url 'register-user' %}">
+            {% csrf_token %}
+
+            <label for="login"></label><input required type="text" id="login" class="fadeIn second" name="username"
+                                              placeholder="enter username">
+            <input required type="text" autocomplete="new-password" id="password" class="fadeIn third" name="password1"
+                   placeholder="enter password">
+            <input required type="text" autocomplete="new-password" id="password" class="fadeIn third" name="password2"
+                   placeholder="enter password">
+            <button type="button" class="fadeIn fourth" value="Register">Register</button>
+        </form>
+
+
+    </div>
+</div>

@@ -26,8 +26,6 @@ def post_by_id(request, pk):
     try:
         post = Post.objects.get(pk=pk)
         comments = Comment.objects.filter(post_id=pk)
-        print("nima chidvhvbkc")
-        print(comments.first().user_fullname())
         ctx = {
             "post": post,
             "comments": comments,
@@ -49,3 +47,9 @@ def save_new_comment(request):
             post_id=post_id,
             user_id=user_id
         )
+        return post_by_id(request, post_id)
+    else:
+        return redirect('blog:home')
+
+
+

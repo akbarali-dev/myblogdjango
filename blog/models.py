@@ -4,7 +4,7 @@ from django.db import models
 
 class Post(models.Model):
     name = models.CharField(max_length=255)
-    title = models.CharField(max_length=255)
+    title = models.TextField()
     image = models.ImageField(upload_to='blog/')
     time_create = models.DateTimeField(auto_now_add=True)
 
@@ -22,4 +22,4 @@ class Comment(models.Model):
         return self.text
 
     def user_fullname(self):
-        return self.user.get_full_name()
+        return self.user.username

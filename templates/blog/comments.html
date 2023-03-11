@@ -13,15 +13,40 @@
     <div class="card-body height3">
         <ul class="chat-list">
             {% for foo in  comment %}
-                <li class="in">
-                    <div class="chat-body">
-                        <div class="chat-message">
-                            <h5>{{ foo.user_fullname }}</h5>
-                            <h5>{{ foo.text }}</h5>
-                            <p>{{ foo.time_create }}</p>
+                {% if user.is_authenticated %}
+                    {% if user.pk == foo.user.pk %}
+                        <li class="out">
+                            <div class="chat-body">
+                                <div class="chat-message">
+                                    <h5>{{ foo.user_fullname }}</h5>
+                                    <h5>{{ foo.text }}</h5>
+                                    <p>{{ foo.time_create }}</p>
+                                </div>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="in">
+                        <div class="chat-body">
+                            <div class="chat-message">
+                                <h5>{{ foo.user_fullname }}</h5>
+                                <h5>{{ foo.text }}</h5>
+                                <p>{{ foo.time_create }}</p>
+                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
+                    {% endif %}
+
+                {% else %}
+                    <li class="in">
+                        <div class="chat-body">
+                            <div class="chat-message">
+                                <h5>{{ foo.user_fullname }}</h5>
+                                <h5>{{ foo.text }}</h5>
+                                <p>{{ foo.time_create }}</p>
+                            </div>
+                        </div>
+                    </li>
+                {% endif %}
             {% endfor %}
         </ul>
     </div>

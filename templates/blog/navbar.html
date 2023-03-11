@@ -1,5 +1,5 @@
-
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,33 +24,62 @@
 <body>
 <ul class="nav nav-tabs fixed-top btn-light" id="myTab" role="tablist">
     <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#persoanl" role="tab" aria-controls="profile"
+           aria-selected="false">
+{#            <img src="{% get_media_prefix %}blog/img.png" width="30" height="30" class="d-inline-block align-top"#}
+{#                 alt="">#}
+            Akbarali
+        </a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
            aria-selected="true">Home</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-           aria-selected="false">Login</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-           aria-selected="false">Register</a>
-    </li>
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" href="{% url 'logout-user' %}" role="tab" aria-controls="profile"
+               aria-selected="false">Logout</a>
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+               aria-selected="false">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+               aria-selected="false">Register</a>
+        </li>
+    {% endif %}
+
 </ul>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         {% block content %}
 
-        {% endblock%}
+        {% endblock %}
 
     </div>
+
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         Login
-        {% include 'blog/login.html' %}
+        {% include 'blog/../authenticate/login.html' %}
     </div>
 
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
         Register
-        {% include 'blog/register.html' %}
+        {% include 'blog/../authenticate/register.html' %}
+    </div>
+    <div class="tab-pane fade" id="information" role="tabpanel" aria-labelledby="contact-tab">
+        Register
+        {% include 'blog/../authenticate/register.html' %}
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        Login
+        {% include 'blog/../authenticate/login.html' %}
+    </div>
+    <div class="tab-pane fade" id="persoanl" role="tabpanel" aria-labelledby="profile-tab">
+        {% include 'blog/personal-information.html' %}
+
     </div>
 </div>
 </div>
