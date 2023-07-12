@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -5,6 +6,7 @@ from django.db import models
 class Post(models.Model):
     name = models.CharField(max_length=255)
     title = models.TextField()
+    # rich_title = RichTextField()
     image = models.ImageField(upload_to='blog/')
     time_create = models.DateTimeField(auto_now_add=True)
 
